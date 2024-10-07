@@ -2,7 +2,7 @@
 
 | Name | How to demo | Notes |
 | ---- | --- | --- |
-| Playable Character | Press the "Start Game" button. A red square will appear on the map, representing the character. Keyboard input (arrow keys) can be used to control it. | - | 
+| Playable Character | Press the "Start Game" button. A red square will appear on the screen, representing the character. Keyboard input (arrow keys) can be used to control it. | - | 
 | Procedural Generation | On each game start or level completion, a new world will be procedurally generated. | - |
 | Obstacles | Each randomly generated world will contain visible obstacles that block the path to the level's goal. | - |
 | Collision | Bumping into an obstacle should result in a restart of the level. | The game timer, based on which the player receives score, will also be reset. |

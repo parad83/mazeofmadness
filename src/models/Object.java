@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import ui.GamePanel;
 
 public class Object extends JComponent {
-    public final int MOVE_PIXELS = 5;
+    public final int MOVE_PIXELS = 1;
     private int x, y, width, height;
 
     private final int X_BOUND = GamePanel.SCREEN_WIDTH;
@@ -18,8 +18,12 @@ public class Object extends JComponent {
         this.y = y_init;
         this.width = width;
         this.height = height;
-        this.setSize(width, height);
-        this.setLocation(x, y);
+        setLocation(x_init, y_init);
+        setSize(width, height);
+    }
+
+    public void draw() {
+
     }
 
     public void paintComponent(Graphics g) {
@@ -28,42 +32,43 @@ public class Object extends JComponent {
     }
 
     public void moveRight() {
-        if (x + MOVE_PIXELS + this.width <= X_BOUND) {
-            this.x += MOVE_PIXELS;
+        if (x + MOVE_PIXELS + width <= X_BOUND) {
+            x += MOVE_PIXELS;
         } else {
-            this.x = X_BOUND - this.width;
+            x = X_BOUND - width;
         }
-        this.setLocation(x, y);
+        setLocation(x, y);
         repaint();
     }
 
     public void moveLeft() {
         if (x - MOVE_PIXELS >= 0) {
-            this.x -= MOVE_PIXELS;
+            x -= MOVE_PIXELS;
         } else {
-            this.x = 0;
+            x = 0;
         }
-        this.setLocation(x, y);
+        setLocation(x, y);
         repaint();
     }
 
     public void moveUp() {
         if (y - MOVE_PIXELS >= 0) {
-            this.y -= MOVE_PIXELS;
+            y -= MOVE_PIXELS;
         } else {
-            this.y = 0;
+            y = 0;
         }
-        this.setLocation(x, y);
+        setLocation(x, y);
         repaint();
     }
 
     public void moveDown() {
-        if (y + MOVE_PIXELS + this.height <= Y_BOUND) {
-            this.y += MOVE_PIXELS;
+        if (y + MOVE_PIXELS + height <= Y_BOUND) {
+            y += MOVE_PIXELS;
+            System.out.println(y);
         } else {
-            this.y = Y_BOUND - this.height;
+            y = Y_BOUND - height;
         }
-        this.setLocation(x, y);
+        setLocation(x, y);
         repaint();
     }
 }

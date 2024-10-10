@@ -11,67 +11,87 @@ public class GamePanel extends JPanel implements KeyListener {
     public static final int SCREEN_WIDTH = 1000;
     public static int SCREEN_HEIGHT = 600;
 
-    public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_D: 
-            player.moveRight();
-            break;
-            case KeyEvent.VK_A:
-            player.moveLeft();
-            break;
-            case KeyEvent.VK_W:
-            player.moveUp();
-            break;
-            case KeyEvent.VK_S:
-            player.moveDown();
-            break;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-        // switch(e.getKeyCode()) {
-        //     case KeyEvent.VK_D: 
-        //     player.moveRight();
-        //     break;
-        //     case KeyEvent.VK_A:
-        //     player.moveLeft();
-        //     break;
-        //     case KeyEvent.VK_W:
-        //     player.moveUp();
-        //     break;
-        //     case KeyEvent.VK_S:
-        //     player.moveDown();
-        //     break;
-        // }
-        System.out.println("key realsed " + e.getKeyCode());
-    }
-
-    public void keyTyped(KeyEvent e) {
-        System.out.println("key typed " + e.getID());
-    }
-
+    private boolean goLeft, goRight, goUp, goDown;
+    private Thread gameloop;
 
     public GamePanel() {
         this.setLayout(null);
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
         player = new Player(200, 100, 20, 10);
-        
-        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.add(player);
     
-
         addKeyListener(this);
         setFocusable(true);
 
-        this.add(player);
-
+        startGameLoop();
 
         JButton but = new JButton("test butt", null);
-
         but.addActionListener(new exampleActionListener());
         but.setBounds(50, 50, 100, 50);
-
-
         this.add(but);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_D:
+            goRight = true;
+            case KeyEvent.VK_A:
+            goLeft = true;
+            case KeyEvent.VK_W:
+            goUp = true;
+            case KeyEvent.VK_S:
+            goDown = true;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_D:
+            goRight = false;
+            // player.moveRight();
+            // break;
+            case KeyEvent.VK_A:
+            goLeft = false;
+            // player.moveLeft();
+            // break;
+            case KeyEvent.VK_W:
+            goUp = false;
+            // player.moveUp();
+            // break;
+            case KeyEvent.VK_S:
+            goDown = false;
+            // player.moveDown();
+            // break;
+        }        
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    private void startGameLoop() {
+        gameloop = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    if (goLeft) { player.moveLeft(); } 
+                    if (goRight) player.moveRight();
+                    if (goUp) { player.moveUp(); } 
+                    if (goDown) player.moveDown();
+
+
+
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+        });
+        gameloop.start(); // Start the game loop thread
     }
 }
 

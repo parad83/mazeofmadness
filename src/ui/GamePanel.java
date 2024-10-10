@@ -8,6 +8,8 @@ import models.*;
 import logic.*;
 
 public class GamePanel extends JPanel implements Runnable {
+
+    boolean first = true;
     
     static final int originalTileSize = 16;
     static final int scale = 3;
@@ -24,7 +26,6 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameloop;
     TileManager tileM = new TileManager();
 
-
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -37,7 +38,10 @@ public class GamePanel extends JPanel implements Runnable {
     
         setFocusable(true);
 
+
+
         startGameLoop();
+
     }
 
     private void startGameLoop() {
@@ -78,10 +82,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void paintComponent(Graphics g) {
-
         player.draw(g);
 
-        tileM.draw(g);
-        g.dispose();
+        if (first) {tileM.draw(g);} else first = false;
     }
 }

@@ -9,14 +9,24 @@ public class TileManager {
     
     public TileManager() {
         tile = new Tile[10];
+
+        for (int i=0; i<10; i++) {
+            tile[i] = new Tile();
+        }
+
     }
 
     public void draw(Graphics g) {
-        tile[0] = new Tile(Color.red, true, true, false, false);
-        tile[1] = new Tile(Color.red, true, true, false, false);
-        tile[2] = new Tile(Color.red, true, false, true, false);
-        tile[0].draw(g);
-        tile[1].draw(g);
-        tile[2].draw(g);
+        int row=0, col=0;
+
+        for (int i=0; i<10; i++) {
+
+            tile[i].draw(g, row, col);
+            if (col >= GamePanel.maxScreenCol) {
+                col = 0;
+                row++;
+            }
+            col++;
+        }
     }
 }

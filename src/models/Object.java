@@ -3,7 +3,9 @@ package models;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JComponent;
+import java.awt.Rectangle;
 import ui.GamePanel;
 
 public class Object extends JComponent {
@@ -56,7 +58,9 @@ public class Object extends JComponent {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillRect(x, y, width, height);
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setColor(Color.RED);
+        g2.fill(new Rectangle(x, y, width, height));
     }
 }

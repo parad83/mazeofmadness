@@ -21,7 +21,7 @@ public class GamePanel extends JPanel implements KeyListener {
         this.setLayout(null);
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 
-        player = new Player(200, 100, 20, 10);
+        player = new Player(200, 100, 20, 20);
         this.add(player);
     
         addKeyListener(this);

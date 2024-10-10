@@ -5,8 +5,8 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 public class Player extends Object {
-    public Player(int x_init, int y_init, int width, int height) {
-        super(x_init, y_init, width, height);
+    public Player(int xInit, int yInit, int width, int height) {
+        super(xInit, yInit, width, height);
     }
 
     @Override

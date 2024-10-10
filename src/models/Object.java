@@ -25,15 +25,6 @@ public class Object extends JComponent {
         setSize(width, height);
     }
 
-    public void draw() {
-
-    }
-
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.setColor(Color.RED);
-    }
-
     public void moveRight() {
         if (x + MOVE_PIXELS + width <= X_BOUND) {
             x += MOVE_PIXELS;

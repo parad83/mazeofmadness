@@ -1,8 +1,8 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import models.*;
 
 public class GamePanel extends JPanel implements KeyListener {
@@ -11,8 +11,11 @@ public class GamePanel extends JPanel implements KeyListener {
     public static final int SCREEN_WIDTH = 1000;
     public static int SCREEN_HEIGHT = 600;
 
-    private boolean goLeft, goRight, goUp, goDown;
-    private Thread gameloop;
+    private boolean goLeft;
+    private boolean goRight;
+    private boolean goUp;
+    private boolean goDown;
+    private Thread gameLoop;
 
     public GamePanel() {
         this.setLayout(null);
@@ -34,37 +37,41 @@ public class GamePanel extends JPanel implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()) {
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_D:
-            goRight = true;
+                goRight = true;
+                break;
             case KeyEvent.VK_A:
-            goLeft = true;
+                goLeft = true;
+                break;
             case KeyEvent.VK_W:
-            goUp = true;
+                goUp = true;
+                break;
             case KeyEvent.VK_S:
-            goDown = true;
+                goDown = true;
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(e.getKeyCode()) {
+        switch (e.getKeyCode()) {
             case KeyEvent.VK_D:
-            goRight = false;
-            // player.moveRight();
-            // break;
+                goRight = false;
+                break;
             case KeyEvent.VK_A:
-            goLeft = false;
-            // player.moveLeft();
-            // break;
+                goLeft = false;
+                break;
             case KeyEvent.VK_W:
-            goUp = false;
-            // player.moveUp();
-            // break;
+                goUp = false;
+                break;
             case KeyEvent.VK_S:
-            goDown = false;
-            // player.moveDown();
-            // break;
+                goDown = false;
+                break;
+            default:
+                break;
         }        
     }
 
@@ -72,16 +79,22 @@ public class GamePanel extends JPanel implements KeyListener {
     public void keyTyped(KeyEvent e) {}
 
     private void startGameLoop() {
-        gameloop = new Thread(new Runnable() {
+        gameLoop = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    if (goLeft) { player.moveLeft(); } 
-                    if (goRight) player.moveRight();
-                    if (goUp) { player.moveUp(); } 
-                    if (goDown) player.moveDown();
-
-
+                    if (goLeft) {
+                        player.moveLeft();
+                    } 
+                    if (goRight) {
+                        player.moveRight();
+                    }
+                    if (goUp) {
+                        player.moveUp();
+                    } 
+                    if (goDown) {
+                        player.moveDown();
+                    }
 
                     try {
                         Thread.sleep(20);
@@ -91,7 +104,7 @@ public class GamePanel extends JPanel implements KeyListener {
                 }
             }
         });
-        gameloop.start(); // Start the game loop thread
+        gameLoop.start(); // Start the game loop thread
     }
 }
 

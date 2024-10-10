@@ -1,8 +1,8 @@
 package models;
 
-import javax.swing.JComponent;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JComponent;
 
 public class Player extends Object {
     public Player(int x_init, int y_init, int width, int height) {

@@ -1,24 +1,27 @@
 
 package models;
 
-import javax.swing.JComponent;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JComponent;
 import ui.GamePanel;
 
 public class Object extends JComponent {
     public final int MOVE_PIXELS = 1;
-    private int x, y, width, height;
+    private int x;
+    private int y;
+    private int width;
+    private int height;
 
     private final int X_BOUND = GamePanel.SCREEN_WIDTH;
     private final int Y_BOUND = GamePanel.SCREEN_HEIGHT;
 
-    public Object(int x_init, int y_init, int width, int height) {
-        this.x = x_init;
-        this.y = y_init;
+    public Object(int xInit, int yInit, int width, int height) {
+        this.x = xInit;
+        this.y = yInit;
         this.width = width;
         this.height = height;
-        setLocation(x_init, y_init);
+        setLocation(xInit, yInit);
         setSize(width, height);
     }
 

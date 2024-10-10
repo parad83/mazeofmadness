@@ -7,20 +7,20 @@ public class Main {
     public static void main(String[] args) {
         JFrame window = new JFrame();
 
-        window.setResizable(false);
+
+        window.setSize(new Dimension(1280, 720));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+        window.setResizable(false);
+
         window.setTitle("Maze of Madness");
 
-        // in main game
-        // window.setSize(400, 300); 
-        
-   
-        GamePanel gamePanel = new GamePanel();
+        window.setLayout(new GridBagLayout());
 
+        GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
 
-
-        window.pack();
         window.setVisible(true); 
     }
 }

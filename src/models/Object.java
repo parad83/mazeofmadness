@@ -13,16 +13,14 @@ public class Object extends JComponent {
     private int width;
     private int height;
 
-    private final int X_BOUND = GamePanel.SCREEN_WIDTH;
-    private final int Y_BOUND = GamePanel.SCREEN_HEIGHT;
+    private final int X_BOUND = GamePanel.screenWidth;
+    private final int Y_BOUND = GamePanel.screenHeight;
 
-    public Object(int xInit, int yInit, int width, int height) {
-        this.x = xInit;
-        this.y = yInit;
-        this.width = width;
-        this.height = height;
-        setLocation(xInit, yInit);
-        setSize(width, height);
+    public Object(int xInit, int yInit, int sWidth, int sHeight) {
+        x = xInit;
+        y = yInit;
+        width = sWidth;
+        height = sHeight;
     }
 
     public void moveRight() {
@@ -31,8 +29,6 @@ public class Object extends JComponent {
         } else {
             x = X_BOUND - width;
         }
-        setLocation(x, y);
-        repaint();
     }
 
     public void moveLeft() {
@@ -41,8 +37,6 @@ public class Object extends JComponent {
         } else {
             x = 0;
         }
-        setLocation(x, y);
-        repaint();
     }
 
     public void moveUp() {
@@ -51,8 +45,6 @@ public class Object extends JComponent {
         } else {
             y = 0;
         }
-        setLocation(x, y);
-        repaint();
     }
 
     public void moveDown() {
@@ -61,7 +53,10 @@ public class Object extends JComponent {
         } else {
             y = Y_BOUND - height;
         }
-        setLocation(x, y);
-        repaint();
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(Color.RED);
+        g.fillRect(x, y, width, height);
     }
 }

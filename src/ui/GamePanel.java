@@ -28,11 +28,6 @@ public class GamePanel extends JPanel implements KeyListener {
         setFocusable(true);
 
         startGameLoop();
-
-        JButton but = new JButton("test butt", null);
-        but.addActionListener(new exampleActionListener());
-        but.setBounds(50, 50, 100, 50);
-        this.add(but);
     }
 
     @Override
@@ -105,12 +100,5 @@ public class GamePanel extends JPanel implements KeyListener {
             }
         });
         gameLoop.start(); // Start the game loop thread
-    }
-}
-
-class exampleActionListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("button pressed " + e.getID());
-
     }
 }

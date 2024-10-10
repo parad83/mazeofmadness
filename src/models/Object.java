@@ -67,7 +67,6 @@ public class Object extends JComponent {
     public void moveDown() {
         if (y + MOVE_PIXELS + height <= Y_BOUND) {
             y += MOVE_PIXELS;
-            System.out.println(y);
         } else {
             y = Y_BOUND - height;
         }

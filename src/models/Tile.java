@@ -26,10 +26,5 @@ public class Tile {
         
         g2.setColor(this.color);
         g2.fill(new Rectangle(col, row, Config.TILE_SIZE, Config.TILE_SIZE));
-
-        // g2.setStroke(new BasicStroke(Config.TILE_BORDER));
-        // g2.setColor(Config.TILE_BORDER_COLOR); 
-        // g2.draw(new Rectangle(col, row, Config.TILE_SIZE-Config.TILE_BORDER, Config.TILE_SIZE-Config.TILE_BORDER));
-
     }
 }

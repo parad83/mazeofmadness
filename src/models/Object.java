@@ -6,54 +6,54 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JComponent;
 import java.awt.Rectangle;
-import ui.GamePanel;
+import ui.Config;
 
 public class Object extends JComponent {
     public final int MOVE_PIXELS = 1;
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
     private int width;
     private int height;
 
-    private final int X_BOUND = GamePanel.screenWidth;
-    private final int Y_BOUND = GamePanel.screenHeight;
+    private final int X_BOUND = Config.SCREEN_WIDTH;
+    private final int Y_BOUND = Config.SCREEN_HEIGHT;
 
     public Object(int xInit, int yInit, int sWidth, int sHeight) {
-        x = xInit;
-        y = yInit;
+        this.x = xInit;
+        this.y = yInit;
         width = sWidth;
         height = sHeight;
     }
 
     public void moveRight() {
-        if (x + MOVE_PIXELS + width <= X_BOUND) {
-            x += MOVE_PIXELS;
+        if (this.x + MOVE_PIXELS + width <= X_BOUND) {
+            this.x += MOVE_PIXELS;
         } else {
-            x = X_BOUND - width;
+            this.x = X_BOUND - width;
         }
     }
 
     public void moveLeft() {
-        if (x - MOVE_PIXELS >= 0) {
-            x -= MOVE_PIXELS;
+        if (this.x - MOVE_PIXELS >= 0) {
+            this.x -= MOVE_PIXELS;
         } else {
-            x = 0;
+            this.x = 0;
         }
     }
 
     public void moveUp() {
-        if (y - MOVE_PIXELS >= 0) {
-            y -= MOVE_PIXELS;
+        if (this.y - MOVE_PIXELS >= 0) {
+            this.y -= MOVE_PIXELS;
         } else {
-            y = 0;
+            this.y = 0;
         }
     }
 
     public void moveDown() {
-        if (y + MOVE_PIXELS + height <= Y_BOUND) {
-            y += MOVE_PIXELS;
+        if (this.y + MOVE_PIXELS + height <= Y_BOUND) {
+            this.y += MOVE_PIXELS;
         } else {
-            y = Y_BOUND - height;
+            this.y = Y_BOUND - height;
         }
     }
 
@@ -61,6 +61,6 @@ public class Object extends JComponent {
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setColor(Color.RED);
-        g2.fill(new Rectangle(x, y, width, height));
+        g2.fill(new Rectangle(this.x, this.y, width, height));
     }
 }

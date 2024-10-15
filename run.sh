@@ -12,6 +12,8 @@ if [ ! -d "$OUTPUT_DIR" ]; then
     mkdir $OUTPUT_DIR
 fi
 
+rm -rf bin
+
 echo "Compiling..."
 javac -d "$OUTPUT_DIR" "$SRC"/*/*.java -Xlint
 

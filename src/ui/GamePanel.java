@@ -8,19 +8,11 @@ import models.*;
 import logic.*;
 
 public class GamePanel extends JPanel implements Runnable {
-
-    boolean first = true;
-    
     static final int originalTileSize = 16;
     static final int scale = 3;
 
-    public static final int tileSize = originalTileSize * scale;
-    public static final int maxScreenCol = 16;
-    public static final int maxScreenRow = 12;
-    public static final int screenWidth = tileSize * maxScreenCol;
-    public static final int screenHeight = tileSize * maxScreenRow;
+    int FPS = Config.FPS;
 
-    int FPS = 60;
     Player player;
     KeyHandler keyhandler = new KeyHandler();
     Thread gameloop;
@@ -28,12 +20,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
 
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
         this.setBackground(Color.cyan);
         this.addKeyListener(keyhandler);
 
-        player = new Player(200, 100, 20, 20, keyhandler);
+        player = new Player(200, 100, 20, 20, keyhandler, tileM);
         this.add(player);
     
         setFocusable(true);
@@ -82,8 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void paintComponent(Graphics g) {
+        tileM.draw(g);
         player.draw(g);
-
-        if (first) {tileM.draw(g);} else first = false;
     }
 }

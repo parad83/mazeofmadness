@@ -8,32 +8,26 @@ import models.*;
 import logic.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    static final int originalTileSize = 16;
-    static final int scale = 3;
-
     int FPS = Config.FPS;
 
     Player player;
-    KeyHandler keyhandler = new KeyHandler();
+    KeyHandler keyHandler = new KeyHandler();
+    TileManager tileManager = new TileManager();
     Thread gameloop;
-    TileManager tileM = new TileManager();
 
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
 
         this.setBackground(Color.cyan);
-        this.addKeyListener(keyhandler);
+        this.addKeyListener(keyHandler);
 
-        player = new Player(200, 100, 20, 20, keyhandler, tileM);
+        player = new Player(200, 100, 20, 20, keyHandler, tileManager);
         this.add(player);
     
         setFocusable(true);
 
-
-
         startGameLoop();
-
     }
 
     private void startGameLoop() {
@@ -43,28 +37,33 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS;
-        double nextDrawTime = System.nanoTime() + drawInterval;
+        double drawInterval = 1E9/FPS;
+        double delta = 0;
+        long lastTime = System.nanoTime();
+        long currTime;
+        long timer = 0;
+        int drawCount = 0;
 
         while (gameloop != null) {
 
-            update();
-            repaint();
+            currTime = System.nanoTime();
+            delta += (currTime - lastTime) / drawInterval;
+            timer += currTime - lastTime;
+            lastTime = currTime;
 
-            double remainingTime = nextDrawTime - System.nanoTime();
-            remainingTime = remainingTime/1000000;
-
-            if (remainingTime < 0) {
-                remainingTime = 0;
+            if (delta > 1) {
+                update();
+                repaint();
+                delta--;
+                drawCount++;
             }
 
-            try {
-                Thread.sleep((long) remainingTime );
-            } catch (InterruptedException e) {
-                System.out.println(e.getMessage());
+            if (timer >= 1E9) {
+                System.out.println(drawCount);
+                drawCount = 0;
+                timer = 0;
             }
 
-            nextDrawTime += drawInterval;
         }
     }
 
@@ -74,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void paintComponent(Graphics g) {
-        tileM.draw(g);
+        tileManager.draw(g);
         player.draw(g);
     }
 }

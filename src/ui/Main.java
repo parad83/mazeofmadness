@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         JFrame window = new JFrame();
 
-
         window.setSize(new Dimension(1280, 720));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

@@ -3,25 +3,25 @@ package logic;
 import java.awt.event.*;
 
 public class KeyHandler implements KeyListener {
-    public boolean goLeft;
-    public boolean goRight;
-    public boolean goUp;
-    public boolean goDown;
+    public boolean leftPressed;
+    public boolean rightPressed;
+    public boolean upPressed;
+    public boolean downPressed;
 
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_D:
-                goRight = true;
+                rightPressed = true;
                 break;
             case KeyEvent.VK_A:
-                goLeft = true;
+                leftPressed = true;
                 break;
             case KeyEvent.VK_W:
-                goUp = true;
+                upPressed = true;
                 break;
             case KeyEvent.VK_S:
-                goDown = true;
+                downPressed = true;
                 break;
             default:
                 break;
@@ -32,16 +32,16 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_D:
-                goRight = false;
+                rightPressed = false;
                 break;
             case KeyEvent.VK_A:
-                goLeft = false;
+                leftPressed = false;
                 break;
             case KeyEvent.VK_W:
-                goUp = false;
+                upPressed = false;
                 break;
             case KeyEvent.VK_S:
-                goDown = false;
+                downPressed = false;
                 break;
             default:
                 break;

@@ -9,23 +9,24 @@ import logic.*;
 public class GamePanel extends JPanel implements Runnable {
     int FPS = Config.FPS;
 
-    Player player;
     KeyHandler keyHandler = new KeyHandler();
     TileManager tileManager = new TileManager();
     Thread gameloop;
+    Player player = new Player(200, 100, (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
+    GameController gameController;
 
-    public GamePanel() {
+
+    public GamePanel(GameController gameController) {
+        this.gameController = gameController;
 
         this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
-
-        this.setBackground(Color.cyan);
         this.addKeyListener(keyHandler);
 
-        player = new Player(200, 100, 20, 20, keyHandler, tileManager);
-        this.add(player);
-    
-        setFocusable(true);
+        this.setFocusable(true);
+    }
 
+    public void setupGame() {
+        this.add(player);
         startGameLoop();
     }
 
@@ -67,12 +68,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (gameController.getGameState() == GameState.STARTED) {
+            player.update();
+        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        tileManager.draw(g);
-        player.draw(g);
+        if (gameController.getGameState() == GameState.STARTED) {
+            tileManager.draw(g);
+            player.draw(g);
+        } else {
+            // TODO: other logic
+        }
     }
 }

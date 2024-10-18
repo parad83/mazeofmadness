@@ -13,22 +13,22 @@ public class Player extends Object {
     }
 
     public void update() {    
-        if (kh.goLeft) {
+        if (kh.leftPressed) {
             if (!tm.intersects(this.x - 1, this.y)) {
                 this.moveLeft();
             }
         }
-        if (kh.goRight) {
+        if (kh.rightPressed) {
             if (!tm.intersects(this.x + 1, this.y)) {
                 this.moveRight();
             }
         }
-        if (kh.goUp) {
+        if (kh.upPressed) {
             if (!tm.intersects(this.x, this.y - 1)) {
                 this.moveUp();
             }
         }
-        if (kh.goDown) {
+        if (kh.downPressed) {
             if (!tm.intersects(this.x, this.y + 1)) {
                 this.moveDown();
             }

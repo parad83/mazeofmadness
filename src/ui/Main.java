@@ -13,8 +13,8 @@ public class Main {
 
         window.setResizable(false);
         window.setTitle("Maze of Madness");
-        // window.setLayout(new GridBagLayout());
         
+
         GameController gameController = new GameController(window);
 
         window.setVisible(true); 

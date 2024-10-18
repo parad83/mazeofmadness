@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import logic.GameState;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 
 public class GameController {
     private GameState gameState;
@@ -52,6 +53,7 @@ public class GameController {
 
     private void showGame() {
         layout.show(window.getContentPane(), "Game");
+        window.getContentPane().setLayout(new GridBagLayout());
         gamePanel.requestFocusInWindow();
     }
 

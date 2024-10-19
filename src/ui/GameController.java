@@ -5,6 +5,7 @@ import logic.GameState;
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 
 public class GameController {
     private GameState gameState;
@@ -32,6 +33,10 @@ public class GameController {
 
     }
 
+    public boolean isGameStarted() {
+        return (this.gameState == GameState.STARTED);
+    }
+
     public void startGame() {
         if (gameState == GameState.STARTED) {
             return;
@@ -42,9 +47,10 @@ public class GameController {
         showGame();
     }
 
-    public void pauseGame() {
-        this.setGameState(GameState.PAUSED);
-        // TODO: pause logic
+    public void stopGame() {
+        this.setGameState(GameState.NOT_STARTED);
+        window.getContentPane().setLayout(layout);
+        showMenu();
     }
 
     private void showMenu() {
@@ -61,7 +67,7 @@ public class GameController {
         return this.gameState;
     }
 
-    public void setGameState(GameState s) {
+    private void setGameState(GameState s) {
         this.gameState = s;
     }
 }

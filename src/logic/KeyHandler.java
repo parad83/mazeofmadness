@@ -2,11 +2,21 @@ package logic;
 
 import java.awt.event.*;
 
+import ui.GamePanel;
+
 public class KeyHandler implements KeyListener {
     public boolean leftPressed;
     public boolean rightPressed;
     public boolean upPressed;
     public boolean downPressed;
+
+    private GamePanel gamePanel;
+
+    public KeyHandler() {}
+
+    public KeyHandler(GamePanel gp) {
+        this.gamePanel = gp;
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -22,6 +32,9 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_S:
                 downPressed = true;
+                break;
+            case KeyEvent.VK_ESCAPE:
+                System.out.println("esc pressed");
                 break;
             default:
                 break;

@@ -10,12 +10,11 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed;
     public boolean downPressed;
 
-    private GamePanel gamePanel;
-
-    public KeyHandler() {}
-
-    public KeyHandler(GamePanel gp) {
-        this.gamePanel = gp;
+    public void reset() {
+        leftPressed = false;
+        rightPressed = false;
+        upPressed = false;
+        downPressed = false;
     }
 
     @Override

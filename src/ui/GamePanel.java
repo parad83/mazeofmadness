@@ -15,16 +15,18 @@ import logic.*;
 public class GamePanel extends JPanel implements Runnable {
     int FPS = Config.FPS;
 
-    KeyHandler keyHandler = new KeyHandler(this);
-    TileManager tileManager = new TileManager();
+    KeyHandler keyHandler = new KeyHandler();
     Thread gameloop;
-    Player player = new Player(200, 100, (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
     GameController gameController;
+    Player player;
+    TileManager tileManager;
 
+    int playerXInit = 200, playerYInit = 100;
     JButton exitButton = new JButton("exit");
 
     public GamePanel(GameController gameController) {
         this.gameController = gameController;
+        this.tileManager = new TileManager(gameController);
 
         this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
         this.addKeyListener(keyHandler);
@@ -33,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.requestFocusInWindow();
 
         exitButton.addActionListener(e -> {
-            exitGame();
+            stopGameLoop(false);
         });
         this.add(exitButton);
 
@@ -49,8 +51,14 @@ public class GamePanel extends JPanel implements Runnable {
             }
         });
     }
+    
+    public void wonGame() {
+        stopGameLoop(true); 
+    }
 
     public void setupGame() {
+        player = new Player(playerXInit, playerYInit, (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
+        keyHandler.reset();
         this.add(player);
         startGameLoop();
     }
@@ -60,8 +68,8 @@ public class GamePanel extends JPanel implements Runnable {
         gameloop.start();
     }
 
-    private void exitGame() {
-        gameController.stopGame();
+    private void stopGameLoop(boolean isWon) {
+        gameController.stopGame(isWon);
         try {
             if (gameloop != null) {
                 gameloop.join();
@@ -69,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable {
         } catch (InterruptedException e) {}
     }
 
-    public void update() {
+    private void update() {
         if (gameController.isGameStarted()) {
             player.update();
         }

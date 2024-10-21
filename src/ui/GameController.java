@@ -30,7 +30,6 @@ public class GameController {
         window.setVisible(true);
 
         showMenu();
-
     }
 
     public boolean isGameStarted() {
@@ -42,15 +41,25 @@ public class GameController {
             return;
         }
 
+
         this.setGameState(GameState.STARTED);
         gamePanel.setupGame();
         showGame();
     }
 
-    public void stopGame() {
+    public void stopGame(boolean isWon) {
         this.setGameState(GameState.NOT_STARTED);
-        window.getContentPane().setLayout(layout);
-        showMenu();
+        if (!isWon) {
+            window.getContentPane().setLayout(layout);
+            showMenu();
+        } else {
+            showScore();
+            // TODO: show custom panel
+        }
+    }
+
+    private void showScore() {
+        layout.show(window.getContentPane(), "Score");
     }
 
     private void showMenu() {

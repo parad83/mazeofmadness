@@ -7,6 +7,8 @@ import utils.*;
 public class Main {
 
     public static void main(String[] args) {
+        Config.loadFont();
+
         JFrame window = new JFrame();
 
         window.setSize(new Dimension(1280, 720));

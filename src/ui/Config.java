@@ -1,9 +1,13 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 
 public class Config {
-
     // Player
     public static final Color PLAYER_COLOR = Color.decode("#EAD637");
 
@@ -31,4 +35,26 @@ public class Config {
     public static final int FPS = 60;
 
 
+    // Custom font
+    private static Font pressStart2p;
+
+    public static void loadFont() {
+        try {
+            File fontFile = new File("resources/PressStart2P-Regular.ttf");
+            pressStart2p = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(20f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(pressStart2p);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+            pressStart2p = new Font("Serif", Font.PLAIN, 12);
+        }
+    }
+
+    public static Font getFont(float size) {
+        if (pressStart2p != null) {
+            return pressStart2p.deriveFont(size);
+        } else {
+            return new Font("Serif", Font.PLAIN, (int) size);
+        }
+    }
 }

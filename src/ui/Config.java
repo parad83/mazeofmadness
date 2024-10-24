@@ -13,6 +13,12 @@ public class Config {
     public static final Color SPAWN_TILE_COLOR = Color.decode("#FFEB3B");
     public static final Color WINNING_TILE_COLOR = Color.decode("#4CAF50");
 
+    // 10 bits
+    public static final int TILE_FLAG = 0x3ff;
+    public static final int TILE_ROW_FLAG = 0xF;
+    public static final int TILE_COL_FLAG = 0xF;
+    public static final int TILE_TYPE_FLAG = 0x3;
+
 
     // Grid
     public static final int MAX_SCREEN_COL = 16;
@@ -23,7 +29,6 @@ public class Config {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; 
     public static final int FPS = 60;
-
 
 
 }

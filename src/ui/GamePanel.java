@@ -2,8 +2,6 @@ package ui;
 
 import java.awt.*;
 
-import javax.print.attribute.SupportedValuesAttribute;
-import javax.sql.rowset.spi.SyncResolver;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusAdapter;
@@ -11,6 +9,7 @@ import java.awt.event.FocusAdapter;
 
 import models.*;
 import logic.*;
+import utils.*;
 
 public class GamePanel extends JPanel implements Runnable {
     int FPS = Config.FPS;
@@ -21,12 +20,16 @@ public class GamePanel extends JPanel implements Runnable {
     Player player;
     TileManager tileManager;
 
-    int playerXInit = 200, playerYInit = 100;
+    int[] playerInitPos = new int[2];
     JButton exitButton = new JButton("exit");
+
+    // for testimg
+    TileBuilder tileBuilder = new TileBuilder();
 
     public GamePanel(GameController gameController) {
         this.gameController = gameController;
         this.tileManager = new TileManager(gameController);
+        this.tileManager.setBuilder(tileBuilder);
 
         this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
         this.addKeyListener(keyHandler);
@@ -57,7 +60,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        player = new Player(playerXInit, playerYInit, (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
+        tileBuilder.buildMap();
+        playerInitPos = tileBuilder.getSpawn();
+        player = new Player(playerInitPos[0], playerInitPos[1], (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
         keyHandler.reset();
         this.add(player);
         startGameLoop();

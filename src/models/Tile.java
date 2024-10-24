@@ -1,10 +1,8 @@
 package models;
 
 import java.awt.Color;
-import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import ui.Config;
 import java.awt.*;
 
@@ -18,27 +16,43 @@ enum TileType {
     TileType(Color c) {
         this.color = c;
     }
+
+    public static TileType getType(int t) {
+        switch(t) {
+            case 0:
+            return UNPLAYABLE;
+            case 1:
+            return SPAWN;
+            case 2:
+            return WINNING;
+            default:
+            return PLAYABLE;
+        }
+    }
 }
 
 public class Tile {
-    int xpos;
-    int ypos;
     TileType type;
+    private int row;
+    private int col;
 
-    public Tile(TileType t) {
-        this.type = t;
+    public Tile(int col, int row, int t) {
+        this.type = TileType.getType(t);
+        this.row = row;
+        this.col = col;
+    }
+
+    public int[] getPos() {
+        return new int[] {this.col*Config.TILE_SIZE+Config.TILE_SIZE/2, this.row*Config.TILE_SIZE + Config.TILE_SIZE/2};
     }
 
     public Color getColor() {
         return this.type.color;
     }
 
-    public void draw(Graphics g, int row, int col) {
+    public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        this.xpos = col;
-        this.ypos = row;
-        
         g2.setColor(getColor());
-        g2.fill(new Rectangle(col, row, Config.TILE_SIZE, Config.TILE_SIZE));
+        g2.fill(new Rectangle(this.col*Config.TILE_SIZE, this.row*Config.TILE_SIZE, Config.TILE_SIZE, Config.TILE_SIZE));
     }
 }

@@ -12,8 +12,8 @@ public class Object extends JComponent {
     public final int MOVE_PIXELS = 1;
     protected int x;
     protected int y;
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
 
     private final int X_BOUND = Config.SCREEN_WIDTH;
     private final int Y_BOUND = Config.SCREEN_HEIGHT;

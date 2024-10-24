@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
+import utils.*;
 
 public class Main {
 
@@ -13,7 +14,6 @@ public class Main {
 
         window.setResizable(false);
         window.setTitle("Maze of Madness");
-        
 
         GameController gameController = new GameController(window);
 

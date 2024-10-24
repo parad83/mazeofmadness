@@ -25,6 +25,7 @@ public class GameController {
 
         layout = new CardLayout();
         window.getContentPane().setLayout(layout);
+        window.getContentPane().setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
         window.getContentPane().add(gameMenu, "Menu");
         window.getContentPane().add(gamePanel, "Game");

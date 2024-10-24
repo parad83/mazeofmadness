@@ -62,10 +62,16 @@ public class GameMenu extends JPanel {
                 onExitGame();
             }
         });
+
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: loading maps
+            }
+        });
     }
 
     private void onStartGame() {
-        System.out.println("Start button clicked");
         gameController.startGame();
     }
 

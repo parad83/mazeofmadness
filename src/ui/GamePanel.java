@@ -19,19 +19,20 @@ public class GamePanel extends JPanel implements Runnable {
     GameController gameController;
     Player player;
     TileManager tileManager;
+    TileBuilder tileBuilder = new TileBuilder();
 
     int[] playerInitPos = new int[2];
-    JButton exitButton = new JButton("exit");
+    JButton exitButton = new Button("exit", 14);
+    JButton saveButton = new Button("save", 14);
 
-    // for testimg
-    TileBuilder tileBuilder = new TileBuilder();
 
     public GamePanel(GameController gameController) {
         this.gameController = gameController;
         this.tileManager = new TileManager(gameController);
         this.tileManager.setBuilder(tileBuilder);
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 150, Config.SCREEN_HEIGHT));
+        this.setLayout(null);
         this.addKeyListener(keyHandler);
 
         this.setFocusable(true);
@@ -40,7 +41,14 @@ public class GamePanel extends JPanel implements Runnable {
         exitButton.addActionListener(e -> {
             stopGameLoop(false);
         });
+        saveButton.addActionListener(e -> {
+            // TODO: save map
+        });
+
+        exitButton.setBounds(Config.SCREEN_WIDTH+50, 20, 100, 50);
+        saveButton.setBounds(Config.SCREEN_WIDTH+50, 70, 100, 50);
         this.add(exitButton);
+        this.add(saveButton);
 
         this.addFocusListener(new FocusAdapter() {
             @Override
@@ -95,6 +103,8 @@ public class GamePanel extends JPanel implements Runnable {
             tileManager.draw(g);
             player.draw(g);
         }
+        g.setColor(Config.UNPLAYABLE_TILE_COLOR);
+        g.fillRect(Config.SCREEN_WIDTH, 0, 150, Config.SCREEN_HEIGHT);
     }
 
     @Override

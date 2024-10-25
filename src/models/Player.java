@@ -1,13 +1,14 @@
 package models;
 
 import logic.KeyHandler;
+import ui.Config;
 
 public class Player extends Object {
     KeyHandler kh;
     TileManager tm;
 
-    public Player(int xInit, int yInit, int width, int height, KeyHandler kh, TileManager tm) {
-        super(xInit, yInit, width, height);
+    public Player(int xInit, int yInit, KeyHandler kh, TileManager tm) {
+        super(xInit, yInit, Config.PLAYER_WIDTH, Config.PLAYER_HEIGHT);
         this.kh = kh;
         this.tm = tm;
     }

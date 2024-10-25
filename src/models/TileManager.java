@@ -29,8 +29,10 @@ public class TileManager {
         if (curr.type == TileType.UNPLAYABLE) {
             return true;
         } else if (curr.type == TileType.WINNING) {
-            gameController.stopGame(true);
-        }
+            int[] pos = curr.getPos();
+            if (x >= pos[0] && x + Config.PLAYER_WIDTH <= pos[0] + ts && y >= pos[1] && y + Config.PLAYER_HEIGHT <= pos[1] + ts) {
+                gameController.gameWon();
+            }        }
         return false;
     }
 }

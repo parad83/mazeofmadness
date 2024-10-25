@@ -8,21 +8,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Config {
-    // Player
-    public static final Color PLAYER_COLOR = Color.decode("#EAD637");
-
     // Tiles
     public static final Color UNPLAYABLE_TILE_COLOR = Color.decode("#D9534F");
     public static final Color PLAYABLE_TILE_COLOR = Color.decode("#5BC0DE");
     public static final Color SPAWN_TILE_COLOR = Color.decode("#FFEB3B");
     public static final Color WINNING_TILE_COLOR = Color.decode("#4CAF50");
-
-    // 10 bits
-    public static final int TILE_FLAG = 0x3ff;
-    public static final int TILE_ROW_FLAG = 0xF;
-    public static final int TILE_COL_FLAG = 0xF;
-    public static final int TILE_TYPE_FLAG = 0x3;
-
 
     // Grid
     public static final int MAX_SCREEN_COL = 16;
@@ -33,6 +23,22 @@ public class Config {
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; 
     public static final int FPS = 60;
+
+    // Player
+    public static final Color PLAYER_COLOR = Color.decode("#EAD637");
+    public static final int PLAYER_HEIGHT = (int)(TILE_SIZE*0.4);
+    public static final int PLAYER_WIDTH = (int)(TILE_SIZE*0.4);
+
+    // GUI
+    public static final Color FOREGROUND_COLOR = UNPLAYABLE_TILE_COLOR;
+
+    // 10 bits
+    public static final int TILE_FLAG = 0x3ff;
+    public static final int TILE_ROW_FLAG = 0xF;
+    public static final int TILE_COL_FLAG = 0xF;
+    public static final int TILE_TYPE_FLAG = 0x3;
+
+
 
 
     // Custom font

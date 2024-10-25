@@ -6,7 +6,10 @@ import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.*;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Color;
 
 public class GameMenu extends JPanel {
 
@@ -20,7 +23,7 @@ public class GameMenu extends JPanel {
     public GameMenu(GameController gameController) {
         this.gameController = gameController;
 
-        this.setBackground(Color.BLACK);
+        this.setBackground(Config.FOREGROUND_COLOR);
         this.setLayout(new GridBagLayout());
 
         startButton = new Button("Begin game", 15);
@@ -38,7 +41,6 @@ public class GameMenu extends JPanel {
         gbc.insets = new Insets(5, 5, 25, 5);
 
         this.add(gameTitle, gbc);
-        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridy++;
         gbc.gridy++;
         this.add(startButton, gbc);

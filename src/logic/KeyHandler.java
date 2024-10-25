@@ -32,9 +32,6 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_S:
                 downPressed = true;
                 break;
-            case KeyEvent.VK_ESCAPE:
-                System.out.println("esc pressed");
-                break;
             default:
                 break;
         }

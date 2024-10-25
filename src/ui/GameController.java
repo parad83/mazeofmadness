@@ -6,22 +6,28 @@ import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
+import models.TileBuilder;
 
 public class GameController {
-    private GameState gameState;
-    private JFrame window;
-    private GamePanel gamePanel;
-    private GameMenu gameMenu;
-    private GameScore gameScore;
-    private CardLayout layout;
+    GameState gameState;
+    JFrame window;
+
+    GamePanel gamePanel;
+    GameMenu gameMenu;
+    GameScore gameScore;
+    CardLayout layout;
+
+    TileBuilder tileBuilder;
 
     public GameController(JFrame window) {
         this.window = window;
         this.gameState = GameState.NOT_STARTED;
 
-        this.gamePanel = new GamePanel(this);
+        this.newBuilder();
+
+        this.gamePanel = new GamePanel(this, tileBuilder);
         this.gameMenu = new GameMenu(this);
-        this.gameScore = new GameScore(this);
+        this.gameScore = new GameScore(this, 0);
 
         layout = new CardLayout();
         window.getContentPane().setLayout(layout);
@@ -33,6 +39,18 @@ public class GameController {
 
         window.setVisible(true);
         showMenu();
+    }
+
+    public void newBuilder() {
+        tileBuilder = new TileBuilder();
+    }
+
+    public void restartGame() {
+        this.setGameState(GameState.STARTED);
+        gamePanel.restart();
+        window.getContentPane().setLayout(layout);
+        showGame();
+
     }
 
     public boolean isGameStarted() {
@@ -49,15 +67,17 @@ public class GameController {
         showGame();
     }
 
-    public void stopGame(boolean isWon) {
+    public void exitGame() {
         this.setGameState(GameState.NOT_STARTED);
-        if (!isWon) {
-            window.getContentPane().setLayout(layout);
-            showMenu();
-        } else {
-            showScore();
-            // TODO: show custom panel
-        }
+        window.getContentPane().setLayout(layout);
+        showMenu();
+    }
+
+    public void gameWon() {
+        this.setGameState(GameState.NOT_STARTED);
+        window.getContentPane().setLayout(layout);
+        gameScore.updateTime(gamePanel.getElapsedTime());
+        showScore();
     }
 
     private void showScore() {

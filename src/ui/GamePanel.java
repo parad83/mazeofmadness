@@ -5,50 +5,64 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusAdapter;
-
-
-import models.*;
-import logic.*;
-import utils.*;
+import models.Player;
+import models.TileBuilder;
+import models.TileManager;
+import logic.KeyHandler;
 
 public class GamePanel extends JPanel implements Runnable {
-    int FPS = Config.FPS;
-
     KeyHandler keyHandler = new KeyHandler();
     Thread gameloop;
     GameController gameController;
     Player player;
     TileManager tileManager;
-    TileBuilder tileBuilder = new TileBuilder();
+    TileBuilder tileBuilder;
 
     int[] playerInitPos = new int[2];
     JButton exitButton = new Button("exit", 14);
     JButton saveButton = new Button("save", 14);
+    JButton restartButton = new Button("restart", 14);
+    JLabel timerLabel = new Label("Time: 00:00:00", 14);
 
+    long elapsedTime;
+    long startTime;
 
-    public GamePanel(GameController gameController) {
+    public GamePanel(GameController gameController, TileBuilder tileBuilder) {
         this.gameController = gameController;
         this.tileManager = new TileManager(gameController);
+        this.tileBuilder = tileBuilder;
         this.tileManager.setBuilder(tileBuilder);
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 150, Config.SCREEN_HEIGHT));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 250, Config.SCREEN_HEIGHT));
         this.setLayout(null);
         this.addKeyListener(keyHandler);
 
         this.setFocusable(true);
         this.requestFocusInWindow();
 
+        restartButton.addActionListener(e -> {
+            restart();
+            
+        });
         exitButton.addActionListener(e -> {
-            stopGameLoop(false);
+            gameController.exitGame();
+            stopGameLoop();
         });
         saveButton.addActionListener(e -> {
             // TODO: save map
         });
 
-        exitButton.setBounds(Config.SCREEN_WIDTH+50, 20, 100, 50);
-        saveButton.setBounds(Config.SCREEN_WIDTH+50, 70, 100, 50);
+        timerLabel.setBounds(Config.SCREEN_WIDTH+50, 0, 200 ,40);
+        timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
+
+        exitButton.setBounds(Config.SCREEN_WIDTH+150, 70, 100, 40);
+        saveButton.setBounds(Config.SCREEN_WIDTH+150, 140, 100, 40);
+        restartButton.setBounds(Config.SCREEN_WIDTH+150, 210, 100, 40);
+
+        this.add(timerLabel);
         this.add(exitButton);
         this.add(saveButton);
+        this.add(restartButton);
 
         this.addFocusListener(new FocusAdapter() {
             @Override
@@ -62,16 +76,46 @@ public class GamePanel extends JPanel implements Runnable {
             }
         });
     }
+
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
     
     public void wonGame() {
-        stopGameLoop(true); 
+        gameController.gameWon();
+        stopGameLoop();
+    }
+
+    public void setupPlayer() {
+        if (tileBuilder == null) {
+            return;
+        }
+        playerInitPos = tileBuilder.getSpawn();
+        player = new Player(playerInitPos[0], playerInitPos[1], keyHandler, tileManager);
+    }
+
+    public void setupTimeLabel() {
+        startTime = System.currentTimeMillis();
+        elapsedTime = 0;
+        timerLabel.setText("Time: 00:00:00");
+    }
+
+    public void restart() {
+        setupPlayer();
+        setupTimeLabel(); 
+
+        keyHandler.reset();
+        startGameLoop();
     }
 
     public void setupGame() {
         tileBuilder.buildMap();
-        playerInitPos = tileBuilder.getSpawn();
-        player = new Player(playerInitPos[0], playerInitPos[1], (int) (Config.TILE_SIZE*0.4), (int) (Config.TILE_SIZE*0.4), keyHandler, tileManager);
-        keyHandler.reset();
+        setupPlayer();
+        setupTimeLabel(); 
+
+        if (player == null) {
+            return;
+        }
         this.add(player);
         startGameLoop();
     }
@@ -81,8 +125,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameloop.start();
     }
 
-    private void stopGameLoop(boolean isWon) {
-        gameController.stopGame(isWon);
+    private void stopGameLoop() {
         try {
             if (gameloop != null) {
                 gameloop.join();
@@ -96,6 +139,17 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public String formatElapsedTime(long millis) {
+        long seconds = millis / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+
+        seconds %= 60;
+        minutes %= 60;
+
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -103,20 +157,21 @@ public class GamePanel extends JPanel implements Runnable {
             tileManager.draw(g);
             player.draw(g);
         }
+
         g.setColor(Config.UNPLAYABLE_TILE_COLOR);
-        g.fillRect(Config.SCREEN_WIDTH, 0, 150, Config.SCREEN_HEIGHT);
+        g.fillRect(Config.SCREEN_WIDTH, 0, 250, Config.SCREEN_HEIGHT);
     }
 
     @Override
     public void run() {
-        double drawInterval = 1E9/FPS;
+        double drawInterval = 1E9/Config.FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currTime;
         long timer = 0;
         int drawCount = 0;
 
-        while (gameController.getGameState() == GameState.STARTED) {
+        while (gameController.isGameStarted()) {
             currTime = System.nanoTime();
             delta += (currTime - lastTime) / drawInterval;
             timer += currTime - lastTime;
@@ -130,7 +185,8 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             if (timer >= 1E9) {
-                System.out.println(drawCount);
+                elapsedTime = System.currentTimeMillis() - startTime;
+                timerLabel.setText("Time: " + formatElapsedTime(elapsedTime));
                 drawCount = 0;
                 timer = 0;
             }

@@ -105,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
         setupTimeLabel(); 
 
         keyHandler.reset();
-        startGameLoop();
     }
 
     public void setupGame() {
@@ -120,7 +119,7 @@ public class GamePanel extends JPanel implements Runnable {
         startGameLoop();
     }
 
-    private void startGameLoop() {
+    public void startGameLoop() {
         gameloop = new Thread(this);
         gameloop.start();
     }
@@ -169,7 +168,6 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currTime;
         long timer = 0;
-        int drawCount = 0;
 
         while (gameController.isGameStarted()) {
             currTime = System.nanoTime();
@@ -181,13 +179,11 @@ public class GamePanel extends JPanel implements Runnable {
                 update();
                 repaint();
                 delta--;
-                drawCount++;
             }
 
             if (timer >= 1E9) {
                 elapsedTime = System.currentTimeMillis() - startTime;
                 timerLabel.setText("Time: " + formatElapsedTime(elapsedTime));
-                drawCount = 0;
                 timer = 0;
             }
 

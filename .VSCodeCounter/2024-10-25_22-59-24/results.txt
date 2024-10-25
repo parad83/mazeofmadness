@@ -1,0 +1,55 @@
+Date : 2024-10-25 22:59:24
+Directory : /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness
+Total : 21 files,  874 codes, 9 comments, 222 blanks, all 1105 lines
+
+Languages
++--------------+------------+------------+------------+------------+------------+
+| language     | files      | code       | comment    | blank      | total      |
++--------------+------------+------------+------------+------------+------------+
+| Java         |         16 |        809 |          8 |        192 |      1,009 |
+| Markdown     |          2 |         29 |          0 |         11 |         40 |
+| Batch        |          1 |         19 |          0 |         11 |         30 |
+| Shell Script |          1 |         14 |          1 |          7 |         22 |
+| Properties   |          1 |          3 |          0 |          1 |          4 |
++--------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                        | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                           |         21 |        874 |          9 |        222 |      1,105 |
+| . (Files)                                                                                   |          5 |         65 |          1 |         30 |         96 |
+| src                                                                                         |         16 |        809 |          8 |        192 |      1,009 |
+| src/logic                                                                                   |          2 |         61 |          0 |         10 |         71 |
+| src/models                                                                                  |          5 |        235 |          0 |         49 |        284 |
+| src/ui                                                                                      |          8 |        473 |          8 |        122 |        603 |
+| src/utils                                                                                   |          1 |         40 |          0 |         11 |         51 |
++---------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| filename                                                                                    | language     | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/.env                        | Properties   |          3 |          0 |          1 |          4 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/README.md                   | Markdown     |         19 |          0 |          9 |         28 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/backlog.md                  | Markdown     |         10 |          0 |          2 |         12 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/run.cmd                     | Batch        |         19 |          0 |         11 |         30 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/run.sh                      | Shell Script |         14 |          1 |          7 |         22 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/logic/GameState.java    | Java         |          6 |          0 |          2 |          8 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/logic/KeyHandler.java   | Java         |         55 |          0 |          8 |         63 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/models/Object.java      | Java         |         55 |          0 |         12 |         67 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/models/Player.java      | Java         |         34 |          0 |          5 |         39 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/models/Tile.java        | Java         |         49 |          0 |         10 |         59 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/models/TileBuilder.java | Java         |         65 |          0 |         15 |         80 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/models/TileManager.java | Java         |         32 |          0 |          7 |         39 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/Button.java          | Java         |          8 |          0 |          3 |         11 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/Config.java          | Java         |         48 |          6 |         13 |         67 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/GameController.java  | Java         |         83 |          0 |         24 |        107 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/GameMenu.java        | Java         |         68 |          1 |         15 |         84 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/GamePanel.java       | Java         |        159 |          1 |         37 |        197 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/GameScore.java       | Java         |         80 |          0 |         18 |         98 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/Label.java           | Java         |         11 |          0 |          3 |         14 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/ui/Main.java            | Java         |         16 |          0 |          9 |         25 |
+| /Users/parad/tue/bachelor-1/quarter-1/programming/mazeofmadness/src/utils/Parser.java       | Java         |         40 |          0 |         11 |         51 |
+| Total                                                                                       |              |        874 |          9 |        222 |      1,105 |
++---------------------------------------------------------------------------------------------+--------------+------------+------------+------------+------------+

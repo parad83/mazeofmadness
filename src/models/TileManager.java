@@ -25,7 +25,11 @@ public class TileManager {
     }
 
     public boolean intersects(int x, int y) {
-        Tile curr = tiles[x/ts + ( y/ts * Config.MAX_SCREEN_COL )];
+        int idx = x/ts + (y/ts * Config.MAX_SCREEN_COL);
+        if (idx >= tiles.length) {
+            return false;
+        }
+        Tile curr = tiles[idx];
         if (curr.type == TileType.UNPLAYABLE) {
             return true;
         } else if (curr.type == TileType.WINNING) {

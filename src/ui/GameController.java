@@ -48,9 +48,9 @@ public class GameController {
     public void restartGame() {
         this.setGameState(GameState.STARTED);
         gamePanel.restart();
+        gamePanel.startGameLoop();
         window.getContentPane().setLayout(layout);
         showGame();
-
     }
 
     public boolean isGameStarted() {

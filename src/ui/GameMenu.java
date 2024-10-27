@@ -28,11 +28,9 @@ public class GameMenu extends JPanel {
         this.setBackground(Config.FOREGROUND_COLOR);
         this.setLayout(new GridBagLayout());
 
-        startButton = new Button("Begin game", 15);
+        startButton = new Button("Begin Game", 15);
         exitButton = new Button("Quit", 15);
-        gameTitle = new JLabel("Maze of Madness");
-        gameTitle.setFont(Config.getFont(30));
-        gameTitle.setForeground(Color.WHITE);
+        gameTitle = new Label("Maze of Madness", 30);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

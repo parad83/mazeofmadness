@@ -203,11 +203,13 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currTime;
         long timer = 0;
+        long obstacleTimer = 0;
 
         while (gameController.isGameStarted()) {
             currTime = System.nanoTime();
             delta += (currTime - lastTime) / drawInterval;
             timer += currTime - lastTime;
+            obstacleTimer += currTime - lastTime;
             lastTime = currTime;
 
             if (delta > 1) {
@@ -222,8 +224,14 @@ public class GamePanel extends JPanel implements Runnable {
                 timer = 0;
             }
 
-            if (timer >= 3E9) {
-                // tielManager. 
+            if (obstacleTimer >= 2e9) {
+                tileBuilder.highlightTiles(); 
+            }
+
+            if (obstacleTimer >= 3E9) {
+                System.out.println("Asdfsdf");
+                tileBuilder.alternateObstacles();
+                obstacleTimer = 0;
             }
 
         }

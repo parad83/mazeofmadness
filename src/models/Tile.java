@@ -13,7 +13,8 @@ enum TileType {
     UNPLAYABLE(Config.UNPLAYABLE_TILE_COLOR),
     PLAYABLE(Config.PLAYABLE_TILE_COLOR),
     SPAWN(Config.SPAWN_TILE_COLOR),
-    WINNING(Config.WINNING_TILE_COLOR);
+    WINNING(Config.WINNING_TILE_COLOR),
+    CHANGING(Config.CHANGING_TILE_COLOR);
 
     Color color;
 
@@ -38,6 +39,8 @@ enum TileType {
                 return SPAWN;
             case 2:
                 return WINNING;
+            case 4:
+                return CHANGING;
             default:
                 return PLAYABLE;
         }

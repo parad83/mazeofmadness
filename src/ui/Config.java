@@ -16,6 +16,7 @@ public class Config {
     public static final Color PLAYABLE_TILE_COLOR = Color.decode("#5BC0DE");
     public static final Color SPAWN_TILE_COLOR = Color.decode("#FFEB3B");
     public static final Color WINNING_TILE_COLOR = Color.decode("#4CAF50");
+    public static final Color CHANGING_TILE_COLOR = Color.decode("#a3f902");
 
     // Grid
     public static final int MAX_SCREEN_COL = 27; // Must be odd

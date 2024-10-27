@@ -48,5 +48,6 @@ public class Player extends Object {
             && !tm.intersects(this.x + this.width - 1, this.y + this.height)) {
             this.moveDown();
         }
+        tm.intersects(this.x, this.y);
     }
 }

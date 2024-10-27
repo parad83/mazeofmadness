@@ -14,8 +14,6 @@ import javax.swing.JPanel;
  */
 public class GameMenu extends JPanel {
     private Button startButton;
-    private Button loadButton;
-    private Button button3;
     private Button exitButton;
     private JLabel gameTitle = new JLabel();
     private GameController gameController;
@@ -31,8 +29,6 @@ public class GameMenu extends JPanel {
         this.setLayout(new GridBagLayout());
 
         startButton = new Button("Begin game", 15);
-        loadButton = new Button("Load game", 15);
-        button3 = new Button("soething", 15);
         exitButton = new Button("Quit", 15);
         gameTitle = new JLabel("Maze of Maddness");
         gameTitle.setFont(Config.getFont(30));
@@ -49,10 +45,6 @@ public class GameMenu extends JPanel {
         gbc.gridy++;
         this.add(startButton, gbc);
         gbc.gridy++;
-        this.add(loadButton, gbc);
-        gbc.gridy++;
-        this.add(button3, gbc);
-        gbc.gridy++;
         this.add(exitButton, gbc);
 
         startButton.addActionListener(new ActionListener() {
@@ -66,13 +58,6 @@ public class GameMenu extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onExitGame();
-            }
-        });
-
-        loadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO: loading maps
             }
         });
     }

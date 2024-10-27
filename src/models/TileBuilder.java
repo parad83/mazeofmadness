@@ -12,6 +12,8 @@ public class TileBuilder {
     Tile[] intersects;
     Edge[] edges;
     Node[] nodes;
+    int[] obstacles;
+    boolean obstacleState;
     Tile spawnTile;
 
     int nodesHorizontal;
@@ -31,6 +33,8 @@ public class TileBuilder {
         this.intersects = new Tile[intersectCount];
         this.edges = new Edge[edgeCount];
         this.nodes = new Node[nodeCount];
+        this.obstacles = new int[nodeCount - 4];
+        this.obstacleState = false;
     }
 
     public Tile[] getTiles() {
@@ -48,6 +52,7 @@ public class TileBuilder {
     public int getSpawnY() {
         return spawnTile.getY() + Config.TILE_SIZE / 2;
     }
+
     /*
      * Performs a Durstenfeld random shuffle on arr.
      */
@@ -57,6 +62,20 @@ public class TileBuilder {
         for (int i = arr.length - 1; i > 0; i--) {
             int randomIndex = rand.nextInt(i + 1);
             Edge temp = arr[randomIndex];
+            arr[randomIndex] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    /*
+     * Performs a Durstenfeld random shuffle on arr.
+     */
+    private static void arrayShuffle(int[] arr) {
+        Random rand = new Random();
+
+        for (int i = arr.length - 1; i > 0; i--) {
+            int randomIndex = rand.nextInt(i + 1);
+            int temp = arr[randomIndex];
             arr[randomIndex] = arr[i];
             arr[i] = temp;
         }
@@ -109,6 +128,52 @@ public class TileBuilder {
                 System.out.println("Invalid edge passed to edgeToCoords()!");
                 return new int[] {};
         }
+    }
+
+    public void highlightTiles() {
+          if (obstacleState) {
+            for (int i = 0; i < obstacles.length / 2; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 4);
+            }
+        } else {
+            for (int i = obstacles.length / 2; i < obstacles.length; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 4);
+            }
+        }
+    }
+
+    public void alternateObstacles() {
+        if (obstacleState) {
+            for (int i = 0; i < obstacles.length / 2; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 0);
+            }
+
+            for (int i = obstacles.length / 2; i < obstacles.length; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 3);
+            }
+        } else {
+            for (int i = obstacles.length / 2; i < obstacles.length; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 0);
+            }
+
+            for (int i = 0; i < obstacles.length / 2; i++) {
+                Node node = nodes[obstacles[i]];
+                int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+                tiles[tileIndex] = new Tile(node.col, node.row, 3);
+            }
+        }
+
+        obstacleState = !obstacleState;
     }
 
     private void randomMap() {
@@ -186,5 +251,11 @@ public class TileBuilder {
 
         // Add winning tile (bottom right)
         tiles[tiles.length - 1] = new Tile(Config.MAX_SCREEN_COL - 1, Config.MAX_SCREEN_ROW - 1, 2);
+
+        // Set up obstacles
+        for (int i = 3; i < nodeCount - 1; i++) {
+            obstacles[i - 3] = i;
+        }
+        arrayShuffle(obstacles);
     }
 }

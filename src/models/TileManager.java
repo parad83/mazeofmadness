@@ -49,6 +49,7 @@ public class TileManager {
         }
         Tile curr = tiles[idx];
         if (curr.type == TileType.UNPLAYABLE) {
+            gameController.resetCurrGame();
             return true;
         } else if (curr.type == TileType.WINNING) {
             int posX = curr.getX();

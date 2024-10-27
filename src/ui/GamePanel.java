@@ -222,6 +222,10 @@ public class GamePanel extends JPanel implements Runnable {
                 timer = 0;
             }
 
+            if (timer >= 3E9) {
+                // tielManager. 
+            }
+
         }
     }
 }

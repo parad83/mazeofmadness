@@ -51,7 +51,14 @@ public class GameController {
     }
 
     /**
-     * Restarts the game using the same map.
+     * Resets the current game.
+     */
+    public void resetCurrGame() {
+        gamePanel.restart();
+    }
+
+    /**
+     * Restarts the game using the same map; called from the score menu.
      */
     public void restartGame() {
         this.setGameState(GameState.STARTED);

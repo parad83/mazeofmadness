@@ -2,7 +2,6 @@ package models;
 
 import logic.KeyHandler;
 import ui.Config;
-import ui.GamePanel;
 
 /**
  * Represents a player.

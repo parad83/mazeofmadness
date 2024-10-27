@@ -1,6 +1,5 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Random;
 import ui.Config;
 
@@ -22,6 +21,9 @@ public class TileBuilder {
     int intersectCount;
     int edgeCount;
 
+    /**
+     * Class constructor.
+     */
     public TileBuilder() {
         nodesHorizontal = (Config.MAX_SCREEN_COL + 1) / 2;
         nodesVertical = (Config.MAX_SCREEN_ROW + 1) / 2;
@@ -29,7 +31,7 @@ public class TileBuilder {
         intersectCount = (nodesHorizontal - 1) * (nodesVertical - 1);
         edgeCount = intersectCount * 2 + (nodesHorizontal - 1) + (nodesVertical - 1);
 
-        this.tiles = new Tile[Config.MAX_SCREEN_COL*Config.MAX_SCREEN_ROW];
+        this.tiles = new Tile[Config.MAX_SCREEN_COL * Config.MAX_SCREEN_ROW];
         this.intersects = new Tile[intersectCount];
         this.edges = new Edge[edgeCount];
         this.nodes = new Node[nodeCount];
@@ -81,9 +83,15 @@ public class TileBuilder {
         }
     }
 
+    /**
+     * Turn coordinates into node.
+     * @param col   Column of desired node.
+     * @param row   Row of desired node.
+     * @return      Node at specified column and row.
+     */
     private Node coordsToNode(int col, int row) {
-        if (col % 2 == 1 || row % 2 == 1 || col < 0 || row < 0 ||
-            col >= Config.MAX_SCREEN_COL || row >= Config.MAX_SCREEN_ROW) {
+        if (col % 2 == 1 || row % 2 == 1 || col < 0 || row < 0 
+            || col >= Config.MAX_SCREEN_COL || row >= Config.MAX_SCREEN_ROW) {
             System.out.println("coordsToNode() called with invalid coords!");
             // return new Node(0, 0);
         }
@@ -92,6 +100,11 @@ public class TileBuilder {
         return nodes[index];
     }
 
+    /**
+     * Get the two nodes adjacent to an edge.
+     * @param edge  Edge to get adjacent nodes from.
+     * @return      Two adjacent nodes.
+     */
     private Node[] edgeConnection(Edge edge) {
         Tile coords = intersects[edge.intersect];
         int col = coords.getCol();
@@ -111,6 +124,11 @@ public class TileBuilder {
         }
     }
 
+    /**
+     * Get the coordinates of an edge.
+     * @param edge  Edge to get coordinates from.
+     * @return      Edge coordinates {x, y}.
+     */
     private int[] edgeToCoords(Edge edge) {
         Tile coords = intersects[edge.intersect];
         int col = coords.getCol();
@@ -130,8 +148,11 @@ public class TileBuilder {
         }
     }
 
+    /**
+     * Highlight the tiles that are about to alternate.
+     */
     public void highlightTiles() {
-          if (obstacleState) {
+        if (obstacleState) {
             for (int i = 0; i < obstacles.length / 2; i++) {
                 Node node = nodes[obstacles[i]];
                 int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
@@ -146,6 +167,9 @@ public class TileBuilder {
         }
     }
 
+    /**
+     * Switches between a random half of the obstacles.
+     */
     public void alternateObstacles() {
         if (obstacleState) {
             for (int i = 0; i < obstacles.length / 2; i++) {
@@ -176,6 +200,20 @@ public class TileBuilder {
         obstacleState = !obstacleState;
     }
 
+    /**
+     * Make all obstacles playable.
+     */
+    public void clearObstacles() {
+        for (int i = 0; i < obstacles.length; i++) {
+            Node node = nodes[obstacles[i]];
+            int tileIndex = node.col + node.row * Config.MAX_SCREEN_COL;
+            tiles[tileIndex] = new Tile(node.col, node.row, 3);
+        }
+    }
+
+    /**
+     * Generate the random map.
+     */
     private void randomMap() {
         // Set nodes up
         for (int i = 0; i < nodesVertical; i++) {

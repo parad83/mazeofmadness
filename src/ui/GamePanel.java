@@ -28,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     long elapsedTime;
     long startTime;
+    long obstacleTimer;
 
     /**
      * Class constructor.
@@ -43,7 +44,8 @@ public class GamePanel extends JPanel implements Runnable {
         FontMetrics metrics = timerLabel.getFontMetrics(timerLabel.getFont());
         labelWidth = metrics.stringWidth(timerLabel.getText());
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + labelWidth + 150, Config.SCREEN_HEIGHT));
+        this.setPreferredSize(
+            new Dimension(Config.SCREEN_WIDTH + labelWidth + 150, Config.SCREEN_HEIGHT));
         this.setLayout(null);
         this.addKeyListener(keyHandler);
 
@@ -62,8 +64,10 @@ public class GamePanel extends JPanel implements Runnable {
         timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 50 + labelWidth, 40);
         timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
-        restartButton.setBounds(Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 110, 50 + labelWidth, 40);
-        exitButton.setBounds(Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 40, 50 + labelWidth, 40);
+        restartButton.setBounds(
+            Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 110, 50 + labelWidth, 40);
+        exitButton.setBounds(
+            Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 40, 50 + labelWidth, 40);
 
         this.add(timerLabel);
         this.add(restartButton);
@@ -101,7 +105,9 @@ public class GamePanel extends JPanel implements Runnable {
         if (tileBuilder == null) {
             return;
         }
-        player = new Player(tileBuilder.getSpawnX() - Config.PLAYER_WIDTH / 2, tileBuilder.getSpawnY() - Config.PLAYER_HEIGHT / 2, keyHandler, tileManager);
+        player = new Player(
+            tileBuilder.getSpawnX() - Config.PLAYER_WIDTH / 2,
+            tileBuilder.getSpawnY() - Config.PLAYER_HEIGHT / 2, keyHandler, tileManager);
     }
 
     /**
@@ -119,6 +125,8 @@ public class GamePanel extends JPanel implements Runnable {
     public void restart() {
         setupPlayer();
         setupTimeLabel(); 
+        obstacleTimer = 0;
+        tileBuilder.clearObstacles();
 
         keyHandler.reset();
     }
@@ -203,7 +211,7 @@ public class GamePanel extends JPanel implements Runnable {
         long lastTime = System.nanoTime();
         long currTime;
         long timer = 0;
-        long obstacleTimer = 0;
+        obstacleTimer = 0;
 
         while (gameController.isGameStarted()) {
             currTime = System.nanoTime();
@@ -229,7 +237,6 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             if (obstacleTimer >= 3E9) {
-                System.out.println("Asdfsdf");
                 tileBuilder.alternateObstacles();
                 obstacleTimer = 0;
             }

@@ -25,6 +25,8 @@ public class GamePanel extends JPanel implements Runnable {
     JButton restartButton = new Button("restart", 14);
     JLabel timerLabel = new Label("Time: 00:00:00", 14);
 
+    int labelWidth;
+
     long elapsedTime;
     long startTime;
 
@@ -39,7 +41,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.tileBuilder = tileBuilder;
         this.tileManager.setBuilder(tileBuilder);
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 400, Config.SCREEN_HEIGHT));
+        FontMetrics metrics = timerLabel.getFontMetrics(timerLabel.getFont());
+        labelWidth = metrics.stringWidth(timerLabel.getText());
+
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + labelWidth + 150, Config.SCREEN_HEIGHT));
         this.setLayout(null);
         this.addKeyListener(keyHandler);
 
@@ -58,12 +63,12 @@ public class GamePanel extends JPanel implements Runnable {
             // TODO: save map
         });
 
-        timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 200, 40);
+        timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, labelWidth, 40);
         timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
-        exitButton.setBounds(Config.SCREEN_WIDTH + 150, 70, 100, 40);
-        saveButton.setBounds(Config.SCREEN_WIDTH + 150, 140, 100, 40);
-        restartButton.setBounds(Config.SCREEN_WIDTH + 150, 210, 100, 40);
+        exitButton.setBounds(Config.SCREEN_WIDTH + 50 , 70, labelWidth, 40);
+        saveButton.setBounds(Config.SCREEN_WIDTH + 50, 140, labelWidth, 40);
+        restartButton.setBounds(Config.SCREEN_WIDTH + 50, 210, labelWidth, 40);
 
         this.add(timerLabel);
         this.add(exitButton);
@@ -191,7 +196,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         g.setColor(Config.UNPLAYABLE_TILE_COLOR);
-        g.fillRect(Config.SCREEN_WIDTH, 0, 400, Config.SCREEN_HEIGHT);
+        g.fillRect(Config.SCREEN_WIDTH, 0, labelWidth + 150, Config.SCREEN_HEIGHT);
     }
 
     /**

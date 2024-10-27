@@ -184,7 +184,9 @@ public class TileBuilder {
             int tileIndex = intersects[i].getCol() + intersects[i].getRow() * Config.MAX_SCREEN_COL;
             tiles[tileIndex] = new Tile(intersects[i].getCol(), intersects[i].getRow(), 0);
         }
-
+        tiles[Config.MAX_SCREEN_COL * (Config.MAX_SCREEN_ROW - 1) + 1] = 
+            new Tile(1, Config.MAX_SCREEN_ROW - 1, 0);
+        
         // Add spawn tile (top left)
         spawnTilesIdx.add(0);
 

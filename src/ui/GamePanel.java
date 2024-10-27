@@ -63,12 +63,12 @@ public class GamePanel extends JPanel implements Runnable {
             // TODO: save map
         });
 
-        timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, labelWidth, 40);
+        timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 50 + labelWidth, 40);
         timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
-        exitButton.setBounds(Config.SCREEN_WIDTH + 50 , 70, labelWidth, 40);
-        saveButton.setBounds(Config.SCREEN_WIDTH + 50, 140, labelWidth, 40);
-        restartButton.setBounds(Config.SCREEN_WIDTH + 50, 210, labelWidth, 40);
+        exitButton.setBounds(Config.SCREEN_WIDTH + 50, 70, 50 + labelWidth, 40);
+        saveButton.setBounds(Config.SCREEN_WIDTH + 50, 140, 50 + labelWidth, 40);
+        restartButton.setBounds(Config.SCREEN_WIDTH + 50, 210, 50 + labelWidth, 40);
 
         this.add(timerLabel);
         this.add(exitButton);

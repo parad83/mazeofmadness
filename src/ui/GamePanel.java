@@ -20,7 +20,6 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileManager;
     TileBuilder tileBuilder;
 
-    int[] playerInitPos = new int[2];
     JButton exitButton = new Button("exit", 14);
     JButton saveButton = new Button("save", 14);
     JButton restartButton = new Button("restart", 14);
@@ -103,8 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (tileBuilder == null) {
             return;
         }
-        playerInitPos = tileBuilder.getSpawn();
-        player = new Player(playerInitPos[0], playerInitPos[1], keyHandler, tileManager);
+        player = new Player(tileBuilder.getSpawnX() - Config.PLAYER_WIDTH / 2, tileBuilder.getSpawnY() - Config.PLAYER_HEIGHT / 2, keyHandler, tileManager);
     }
 
     /**

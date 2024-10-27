@@ -12,7 +12,7 @@ public class TileBuilder {
     Tile[] intersects;
     Edge[] edges;
     Node[] nodes;
-    ArrayList<Integer> spawnTilesIdx = new ArrayList<Integer>();
+    Tile spawnTile;
 
     int nodesHorizontal;
     int nodesVertical;
@@ -41,11 +41,13 @@ public class TileBuilder {
         randomMap();
     }
 
-    public int[] getSpawn() {
-        Tile spawnTile = tiles[spawnTilesIdx.get(0)];
-        return new int[] {spawnTile.getX() - Config.TILE_SIZE / 4, spawnTile.getY() - Config.TILE_SIZE / 4};
+    public int getSpawnX() {
+        return spawnTile.getX() + Config.TILE_SIZE / 2;
     }
 
+    public int getSpawnY() {
+        return spawnTile.getY() + Config.TILE_SIZE / 2;
+    }
     /*
      * Performs a Durstenfeld random shuffle on arr.
      */
@@ -180,7 +182,7 @@ public class TileBuilder {
             new Tile(1, Config.MAX_SCREEN_ROW - 1, 0);
         
         // Add spawn tile (top left)
-        spawnTilesIdx.add(0);
+        spawnTile = tiles[0];
 
         // Add winning tile (bottom right)
         tiles[tiles.length - 1] = new Tile(Config.MAX_SCREEN_COL - 1, Config.MAX_SCREEN_ROW - 1, 2);

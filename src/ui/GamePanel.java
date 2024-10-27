@@ -23,6 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     JButton exitButton = new Button("exit", 14);
     JButton restartButton = new Button("restart", 14);
     JLabel timerLabel = new Label("Time: 00:00:00", 14);
+    JLabel tutorialLabel = new Label("<html>Use w, s, a, d to move the player around the map.<br/><br/>You must reach the green tile before the madness gets to you!!</html>", 12);
 
     int labelWidth;
 
@@ -62,7 +63,8 @@ public class GamePanel extends JPanel implements Runnable {
         });
 
         timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 50 + labelWidth, 40);
-        timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
+
+        tutorialLabel.setBounds(Config.SCREEN_WIDTH + 50, 100, 50 + labelWidth, 100);
 
         restartButton.setBounds(
             Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 110, 50 + labelWidth, 40);
@@ -72,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.add(timerLabel);
         this.add(restartButton);
         this.add(exitButton);
+        this.add(tutorialLabel);
 
         this.addFocusListener(new FocusAdapter() {
             @Override

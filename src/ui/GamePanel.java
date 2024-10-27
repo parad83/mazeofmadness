@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.tileBuilder = tileBuilder;
         this.tileManager.setBuilder(tileBuilder);
 
-        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 250, Config.SCREEN_HEIGHT));
+        this.setPreferredSize(new Dimension(Config.SCREEN_WIDTH + 300, Config.SCREEN_HEIGHT));
         this.setLayout(null);
         this.addKeyListener(keyHandler);
 
@@ -191,7 +191,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         g.setColor(Config.UNPLAYABLE_TILE_COLOR);
-        g.fillRect(Config.SCREEN_WIDTH, 0, 250, Config.SCREEN_HEIGHT);
+        g.fillRect(Config.SCREEN_WIDTH, 0, 300, Config.SCREEN_HEIGHT);
     }
 
     /**

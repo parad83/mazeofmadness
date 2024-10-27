@@ -64,7 +64,7 @@ public class GameScore extends JPanel {
     }
 
     public void updateTime(long milliseconds) {
-        timeLabel.setText("It took you " + formatTime(milliseconds) + " to finish the map");
+        timeLabel.setText("It took you " + (float) milliseconds / 1000.0 + " seconds to finish the map");
         this.repaint();
     }
 

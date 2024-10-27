@@ -1,27 +1,22 @@
 # Maze of Madness
 
-## Usage
+Maze of Madness is a game about being stuck in a maze. Lost, wandering, unsure what to do, you want to escape at all costs.
+Will you be able to prove yourself and defeat the curse of this maze, or will you give up like many others before you?
 
-### For Unix systems
-```sh
-chmod +x script.sh
-./script.sh
-```
+## Time System
 
-### For Windows systems
+You must try to finish the maze as quickly as possible, as to avoid its negative effects wearing you down.
 
-#### Using Git
+## Map Generation
 
--- Install [Git](https://git-scm.com/downloads/win) on your device 
+Each map is unique. With many combinations possible, there is no limit to how much fun you can have.
 
--- Open Git Bash in this directory
+## Git Versioning
 
-```bash
-chmod +x srcipt.sh
-./script.sh
-```
+Access the GitHub repository through [this link](https://github.com/parad83/mazeofmadness).
 
-#### Using Cmd
-```cmd
-script.cmd
-```
+# Gameplay
+
+Press `Begin Game` to start playing. Move the player character using <kbd>W, A, S, D</kbd>. You can choose to restart if you feel stuck.
+
+Once you reach the finish, you can either replay the current map, or choose to generate a new one.

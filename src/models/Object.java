@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 import ui.Config;
 
 public class Object extends JComponent {
-    public final int MOVE_PIXELS = 1;
+    public final int MOVE_PIXELS = 2;
     protected int x;
     protected int y;
     protected int width;

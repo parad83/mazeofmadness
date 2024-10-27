@@ -42,6 +42,14 @@ public class Tile {
         this.col = col;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public int[] getPos() {
         return new int[] {this.col*Config.TILE_SIZE+Config.TILE_SIZE/2, this.row*Config.TILE_SIZE + Config.TILE_SIZE/2};
     }

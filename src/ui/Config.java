@@ -15,10 +15,10 @@ public class Config {
     public static final Color WINNING_TILE_COLOR = Color.decode("#4CAF50");
 
     // Grid
-    public static final int MAX_SCREEN_COL = 16;
-    public static final int MAX_SCREEN_ROW = 12;
+    public static final int MAX_SCREEN_COL = 27; // Must be odd
+    public static final int MAX_SCREEN_ROW = 15; // Must be odd
     static final int ORIGINAL_TILE_SIZE = 16;
-    static final int TILE_SCALE = 3;
+    static final int TILE_SCALE = 2;
     public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * TILE_SCALE; 
     public static final int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COL;
     public static final int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROW; 

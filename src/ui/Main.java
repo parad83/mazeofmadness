@@ -12,7 +12,7 @@ public class Main {
 
         JFrame window = new JFrame();
 
-        window.setSize(new Dimension(1280, 720));
+        window.setSize(new Dimension(1480, 720));
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         window.setResizable(false);

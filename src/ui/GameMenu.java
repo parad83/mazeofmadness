@@ -1,18 +1,18 @@
 package ui;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+/**
+ * Represents the game's main menu.
+ */
 public class GameMenu extends JPanel {
-
     private Button startButton;
     private Button loadButton;
     private Button button3;
@@ -20,6 +20,10 @@ public class GameMenu extends JPanel {
     private JLabel gameTitle = new JLabel();
     private GameController gameController;
 
+    /**
+     * Class constructor.
+     * @param gameController    Game controller object.
+     */
     public GameMenu(GameController gameController) {
         this.gameController = gameController;
 

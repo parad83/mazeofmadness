@@ -1,13 +1,14 @@
 package ui;
 
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import logic.GameState;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.BorderLayout;
 import models.TileBuilder;
 
+/**
+ * Controls main logic of the UI and game state.
+ */
 public class GameController {
     GameState gameState;
     JFrame window;
@@ -19,6 +20,10 @@ public class GameController {
 
     TileBuilder tileBuilder;
 
+    /**
+     * Class constructor.
+     * @param window    Main window of the application.
+     */
     public GameController(JFrame window) {
         this.window = window;
         this.gameState = GameState.NOT_STARTED;
@@ -45,6 +50,9 @@ public class GameController {
         tileBuilder = new TileBuilder();
     }
 
+    /**
+     * Restarts the game using the same map.
+     */
     public void restartGame() {
         this.setGameState(GameState.STARTED);
         gamePanel.restart();
@@ -57,6 +65,9 @@ public class GameController {
         return (this.gameState == GameState.STARTED);
     }
 
+    /**
+     * Starts the game and shows it.
+     */
     public void startGame() {
         if (gameState == GameState.STARTED) {
             return;
@@ -67,12 +78,18 @@ public class GameController {
         showGame();
     }
 
+    /**
+     * Exits to the main menu.
+     */
     public void exitGame() {
         this.setGameState(GameState.NOT_STARTED);
         window.getContentPane().setLayout(layout);
         showMenu();
     }
 
+    /**
+     * Called when the game is won to update state and shows score menu.
+     */
     public void gameWon() {
         this.setGameState(GameState.NOT_STARTED);
         window.getContentPane().setLayout(layout);
@@ -80,16 +97,25 @@ public class GameController {
         showScore();
     }
 
+    /**
+     * Shows the score menu.
+     */
     private void showScore() {
         layout.show(window.getContentPane(), "Score");
         window.getContentPane().setLayout(new GridBagLayout());
         gameScore.requestFocusInWindow();
     }
 
+    /**
+     * Shows the main menu.
+     */
     private void showMenu() {
         layout.show(window.getContentPane(), "Menu");
     }
 
+    /**
+     * Shows the game window.
+     */
     private void showGame() {
         layout.show(window.getContentPane(), "Game");
         window.getContentPane().setLayout(new GridBagLayout());

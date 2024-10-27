@@ -2,14 +2,18 @@ package logic;
 
 import java.awt.event.*;
 
-import ui.GamePanel;
-
+/**
+ * Deals with keyboard input and maintains state of keys.
+ */
 public class KeyHandler implements KeyListener {
     public boolean leftPressed;
     public boolean rightPressed;
     public boolean upPressed;
     public boolean downPressed;
 
+    /**
+     * Resets all maintained state to default values.
+     */
     public void reset() {
         leftPressed = false;
         rightPressed = false;
@@ -17,6 +21,9 @@ public class KeyHandler implements KeyListener {
         downPressed = false;
     }
 
+    /**
+     * Handles key press events.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -37,6 +44,9 @@ public class KeyHandler implements KeyListener {
         }
     }
 
+    /**
+     * Handles key release events.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {

@@ -2,10 +2,11 @@ package ui;
 
 import java.awt.*;
 import javax.swing.*;
-import utils.*;
 
+/**
+ * Main class of the application.
+ */
 public class Main {
-
     public static void main(String[] args) {
         Config.loadFont();
 

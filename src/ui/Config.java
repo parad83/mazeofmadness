@@ -7,6 +7,9 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Contains config state of the game.
+ */
 public class Config {
     // Tiles
     public static final Color UNPLAYABLE_TILE_COLOR = Color.decode("#D9534F");
@@ -26,8 +29,8 @@ public class Config {
 
     // Player
     public static final Color PLAYER_COLOR = Color.decode("#EAD637");
-    public static final int PLAYER_HEIGHT = (int)(TILE_SIZE*0.4);
-    public static final int PLAYER_WIDTH = (int)(TILE_SIZE*0.4);
+    public static final int PLAYER_HEIGHT = (int) (TILE_SIZE * 0.4);
+    public static final int PLAYER_WIDTH = (int) (TILE_SIZE * 0.4);
 
     // GUI
     public static final Color FOREGROUND_COLOR = UNPLAYABLE_TILE_COLOR;
@@ -39,11 +42,12 @@ public class Config {
     public static final int TILE_TYPE_FLAG = 0x3;
 
 
-
-
     // Custom font
     private static Font pressStart2p;
 
+    /**
+     * Loads the preset font for the game.
+     */
     public static void loadFont() {
         try {
             File fontFile = new File("resources/PressStart2P-Regular.ttf");
@@ -56,6 +60,11 @@ public class Config {
         }
     }
 
+    /**
+     * Returns the custom font at a specified size.
+     * @param size  Size of the font to be returned.
+     * @return      Font object.
+     */
     public static Font getFont(float size) {
         if (pressStart2p != null) {
             return pressStart2p.deriveFont(size);

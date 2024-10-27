@@ -1,15 +1,17 @@
 package ui;
 
 import java.awt.*;
-
-import javax.swing.*;
-import java.awt.event.FocusEvent;
 import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.*;
+import logic.KeyHandler;
 import models.Player;
 import models.TileBuilder;
 import models.TileManager;
-import logic.KeyHandler;
 
+/**
+ * Contains the game loop and UI.
+ */
 public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameloop;
@@ -27,6 +29,11 @@ public class GamePanel extends JPanel implements Runnable {
     long elapsedTime;
     long startTime;
 
+    /**
+     * Class constructor.
+     * @param gameController    Game controller object.
+     * @param tileBuilder       Tile builder object.
+     */
     public GamePanel(GameController gameController, TileBuilder tileBuilder) {
         this.gameController = gameController;
         this.tileManager = new TileManager(gameController);
@@ -52,12 +59,12 @@ public class GamePanel extends JPanel implements Runnable {
             // TODO: save map
         });
 
-        timerLabel.setBounds(Config.SCREEN_WIDTH+50, 0, 200 ,40);
+        timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 200, 40);
         timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
-        exitButton.setBounds(Config.SCREEN_WIDTH+150, 70, 100, 40);
-        saveButton.setBounds(Config.SCREEN_WIDTH+150, 140, 100, 40);
-        restartButton.setBounds(Config.SCREEN_WIDTH+150, 210, 100, 40);
+        exitButton.setBounds(Config.SCREEN_WIDTH + 150, 70, 100, 40);
+        saveButton.setBounds(Config.SCREEN_WIDTH + 150, 140, 100, 40);
+        restartButton.setBounds(Config.SCREEN_WIDTH + 150, 210, 100, 40);
 
         this.add(timerLabel);
         this.add(exitButton);
@@ -81,11 +88,17 @@ public class GamePanel extends JPanel implements Runnable {
         return elapsedTime;
     }
     
+    /**
+     * Called when the game is won and sets the appropriate state.
+     */
     public void wonGame() {
         gameController.gameWon();
         stopGameLoop();
     }
 
+    /**
+     * Sets up initial conditions of the player.
+     */
     public void setupPlayer() {
         if (tileBuilder == null) {
             return;
@@ -94,12 +107,18 @@ public class GamePanel extends JPanel implements Runnable {
         player = new Player(playerInitPos[0], playerInitPos[1], keyHandler, tileManager);
     }
 
+    /**
+     * Sets up the time label.
+     */
     public void setupTimeLabel() {
         startTime = System.currentTimeMillis();
         elapsedTime = 0;
         timerLabel.setText("Time: 00:00:00");
     }
 
+    /**
+     * Sets the player in the spawn position and resets the timer.
+     */
     public void restart() {
         setupPlayer();
         setupTimeLabel(); 
@@ -107,6 +126,9 @@ public class GamePanel extends JPanel implements Runnable {
         keyHandler.reset();
     }
 
+    /**
+     * Sets up a new game, generating a new map.
+     */
     public void setupGame() {
         tileBuilder.buildMap();
         setupPlayer();
@@ -119,17 +141,25 @@ public class GamePanel extends JPanel implements Runnable {
         startGameLoop();
     }
 
+    /**
+     * Starts the main loop thread of the game.
+     */
     public void startGameLoop() {
         gameloop = new Thread(this);
         gameloop.start();
     }
 
+    /**
+     * Stops the game loop thread.
+     */
     private void stopGameLoop() {
         try {
             if (gameloop != null) {
                 gameloop.join();
             }
-        } catch (InterruptedException e) {}
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void update() {
@@ -138,6 +168,11 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Formats the elapsed time from milliseconds to hours, minutes and seconds.
+     * @param millis    Number of milliseconds.
+     * @return          Formatted string containing the time.
+     */
     public String formatElapsedTime(long millis) {
         long seconds = millis / 1000;
         long minutes = seconds / 60;
@@ -161,9 +196,12 @@ public class GamePanel extends JPanel implements Runnable {
         g.fillRect(Config.SCREEN_WIDTH, 0, 250, Config.SCREEN_HEIGHT);
     }
 
+    /**
+     * Main loop of the game.
+     */
     @Override
     public void run() {
-        double drawInterval = 1E9/Config.FPS;
+        double drawInterval = 1E9 / Config.FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currTime;

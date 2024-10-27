@@ -21,7 +21,6 @@ public class GamePanel extends JPanel implements Runnable {
     TileBuilder tileBuilder;
 
     JButton exitButton = new Button("exit", 14);
-    JButton saveButton = new Button("save", 14);
     JButton restartButton = new Button("restart", 14);
     JLabel timerLabel = new Label("Time: 00:00:00", 14);
 
@@ -59,21 +58,16 @@ public class GamePanel extends JPanel implements Runnable {
             gameController.exitGame();
             stopGameLoop();
         });
-        saveButton.addActionListener(e -> {
-            // TODO: save map
-        });
 
         timerLabel.setBounds(Config.SCREEN_WIDTH + 50, 0, 50 + labelWidth, 40);
         timerLabel.setBackground(Config.UNPLAYABLE_TILE_COLOR);
 
-        exitButton.setBounds(Config.SCREEN_WIDTH + 50, 70, 50 + labelWidth, 40);
-        saveButton.setBounds(Config.SCREEN_WIDTH + 50, 140, 50 + labelWidth, 40);
-        restartButton.setBounds(Config.SCREEN_WIDTH + 50, 210, 50 + labelWidth, 40);
+        restartButton.setBounds(Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 110, 50 + labelWidth, 40);
+        exitButton.setBounds(Config.SCREEN_WIDTH + 50, Config.SCREEN_HEIGHT - 40, 50 + labelWidth, 40);
 
         this.add(timerLabel);
-        this.add(exitButton);
-        this.add(saveButton);
         this.add(restartButton);
+        this.add(exitButton);
 
         this.addFocusListener(new FocusAdapter() {
             @Override

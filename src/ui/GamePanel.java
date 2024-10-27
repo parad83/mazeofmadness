@@ -23,7 +23,7 @@ public class GamePanel extends JPanel implements Runnable {
     JButton exitButton = new Button("exit", 14);
     JButton restartButton = new Button("restart", 14);
     JLabel timerLabel = new Label("Time: 00:00:00", 14);
-    JLabel tutorialLabel = new Label("<html>Use w, s, a, d to move the player around the map.<br/><br/>You must reach the green tile before the madness gets to you!!</html>", 12);
+    JLabel tutorialLabel = new Label(String.format("<html>Use <strong>w, a, s, d</strong> to move the player around the map.<br/><br/>You must reach the green tile before the madness gets to you!!</html>", Config.WINNING_TILE_COLOR), 12);
 
     int labelWidth;
 

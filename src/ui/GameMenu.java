@@ -30,7 +30,7 @@ public class GameMenu extends JPanel {
 
         startButton = new Button("Begin game", 15);
         exitButton = new Button("Quit", 15);
-        gameTitle = new JLabel("Maze of Maddness");
+        gameTitle = new JLabel("Maze of Madness");
         gameTitle.setFont(Config.getFont(30));
         gameTitle.setForeground(Color.WHITE);
 
